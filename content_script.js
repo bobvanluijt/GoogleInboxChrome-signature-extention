@@ -1,9 +1,26 @@
+/*_          _          _      _         _                   
+ | |        | |        (_)    | |       | |                  
+ | | ___   _| |__  _ __ _  ___| | _____ | | ___   __ _ _   _ 
+ | |/ / | | | '_ \| '__| |/ __| |/ / _ \| |/ _ \ / _` | | | |
+ |   <| |_| | |_) | |  | | (__|   < (_) | | (_) | (_| | |_| |
+ |_|\_\\__,_|_.__/|_|  |_|\___|_|\_\___/|_|\___/ \__, |\__, |
+                                                  __/ | __/ |
+                                                 |___/ |___/ 
+	Google chrome extension by Bob van Luijt
+	-- This extension adds a signature to Google Inbox --
+	-- issues? Github! https://github.com/kubrickology/GoogleInboxChrome-signature-extention/issues --
+												 */
+												 
 var imInMd5 = '005111c7f697b47d29d20371dfc80574';
 var signature;
 var signatureHtml;
 
 chrome.storage.sync.get("inboxSignature", function (obj) {
 	signature = obj['inboxSignature'];
+	if(!signature){
+		signature = 'This is the Kubrickolo.gy (<a href="https://twitter.com/kubrickology" target="_blank">@kubrickology</a>@kubrickology</a>) <strong>html</strong> Google Inbox signature';
+		chrome.storage.sync.set({'inboxSignature': document.getElementById('createSignatureText').value});
+	}
 	signatureHtml = '<div class="'+imInMd5+'">'+signature+'</div>';
 });
 
@@ -46,16 +63,9 @@ function addTheSignature(){
 	}
 }
 
-//var gH = document.getElementsByClassName("gH");
-//var ghListener = gH[0];
-//ghListener.addEventListener("click", function(){
 setInterval(function(){
 	addTheSignature();
 }, 10);
-//});
-
-
-
 
 var x2 = document.getElementsByClassName("oCKk2");
 var parentDiv = x2[0].parentNode;
