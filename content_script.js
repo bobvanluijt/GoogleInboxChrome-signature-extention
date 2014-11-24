@@ -29,6 +29,9 @@ chrome.storage.sync.get("inboxSignature", function (obj) {
 });
 
 function showTheBigWindow(){
+	var removeDraft = document.getElementsByClassName("d0");
+	var removeDraftRemove = removeDraft[0].remove();
+	
 	var iDiv = document.createElement('div');
 	iDiv.id = 'createSignatureBlack';
 	document.getElementsByTagName('body')[0].appendChild(iDiv);
