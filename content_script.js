@@ -76,7 +76,9 @@ setInterval(function(){
 var x2 = document.getElementsByClassName("oCKk2");
 var parentDiv = x2[0].parentNode;
 var parentDivContent = parentDiv.innerHTML;
-	parentDiv.innerHTML = '<li class="eR"><div class="fS o1 fn" jstcache="0"></div><div class="mD" id="createSignature" jstcache="0">Signature</div></li>'+parentDivContent;
+	if(!document.getElementById('signature_eR')){
+		parentDiv.innerHTML = '<li class="eR" id="signature_eR"><div class="fS o1 fn" jstcache="0"></div><div class="mD" id="createSignature" jstcache="0">Signature</div></li>'+parentDivContent;
+	}
 document.getElementById('createSignature').addEventListener("click", function(){
 	showTheBigWindow();
 });
