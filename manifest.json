@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "Google Inbox Signature extension (inbox.google.com)",
+  "name": "Google Inbox Signature extension",
   "description": "Creating HTML signature emails in Google's Inbox.",
   "version": "0.2",
 
