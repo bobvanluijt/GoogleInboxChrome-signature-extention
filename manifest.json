@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
 
-  "name": "GoogleInboxChrome-signature-extention",
-  "description": "Creating HTML5 signature emails in Google inbox.",
-  "version": "0.1",
+  "name": "Google Inbox Signature extension (inbox.google.com)",
+  "description": "Creating HTML signature emails in Google's Inbox.",
+  "version": "0.2",
 
   
   "permissions": [
