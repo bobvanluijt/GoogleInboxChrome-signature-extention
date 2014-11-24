@@ -13,12 +13,17 @@
 var imInMd5 = '005111c7f697b47d29d20371dfc80574';
 var signature;
 var signatureHtml;
+var startRunning = false;
 
 chrome.storage.sync.get("inboxSignature", function (obj) {
 	signature = obj['inboxSignature'];
 	if(!signature){
-		signature = 'This is the Kubrickolo.gy (<a href="https://twitter.com/kubrickology" target="_blank">@kubrickology</a>@kubrickology</a>) <strong>html</strong> Google Inbox signature';
-		chrome.storage.sync.set({'inboxSignature': signature});
+		signature = 'This is the Kubrickolo.gy (<a href="https://twitter.com/kubrickology" target="_blank">@kubrickology</a>@kubrickology</a>) <strong>html</strong> Google Inbox signature<p>To change: goto the menu in the left top, scroll down and click <strong>signature</strong> above <em>settings</em></p>';
+		chrome.storage.sync.set({'inboxSignature': signature}, function(){
+			startRunning = true;	
+		});
+	} else {
+		startRunning = true;	
 	}
 	signatureHtml = '<div class="'+imInMd5+'">'+signature+'</div>';
 });
@@ -63,7 +68,9 @@ function addTheSignature(){
 }
 
 setInterval(function(){
-	addTheSignature();
+	if(startRunning===true){
+		addTheSignature();
+	}
 }, 10);
 
 var x2 = document.getElementsByClassName("oCKk2");
