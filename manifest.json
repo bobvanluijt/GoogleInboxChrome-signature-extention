@@ -3,9 +3,12 @@
 
   "name": "Google Inbox Signature extension",
   "description": "Creating HTML signature emails in Google's Inbox.",
-  "version": "0.4",
+  "version": "0.5",
 
-  
+  "icons": { "16": "icon16.png",
+           "48": "icon48.png",
+          "128": "icon128.png" },
+		  
   "permissions": [
     "https://inbox.google.com/",
 	"http://inbox.google.com/",
@@ -13,7 +16,7 @@
 	"tabs"
   ],
   "background": {
-    "scripts": ["background.js"],
+    "scripts": ["jquery.min.js","background.js"],
     "persistent": false
   },
   "browser_action": {}
