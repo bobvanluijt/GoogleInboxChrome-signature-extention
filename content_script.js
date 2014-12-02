@@ -40,6 +40,8 @@ function showTheBigWindow(){
 	
 	document.getElementById('createSignatureBlack').innerHTML = '<div id="createSignatureBlack" style="background-color: rgba(10,10,10,.6); bottom: 0; left: 0; position: fixed; right: 0; top: 0; z-index: 50; align-items: center; -webkit-align-items: center; display: -webkit-flex; display: flex; visibility: visible;"><div class="pA" jstcache="0" style="background-color: #fff;border-radius: 2px;box-shadow: 0 0 14px rgba(0,0,0,.24),0 14px 28px rgba(0,0,0,.48);height: 75%;margin: 0 auto;min-height: 260px;overflow: hidden;width: 600px;-webkit-flex-direction: column;flex-direction: column;display: -webkit-flex;display: flex;"><div style="border-bottom: 1px solid #e5e5e5;color: #212121;font-size: 16px;height: 60px;line-height: 60px;padding: 0 24px;text-align: left;">Add a HTML signature</div><div><textarea id="createSignatureText" class="ckeditor" style="width: 96%;height: 160px;margin: 2%; z-index:999999">'+signature+'</textarea><button id="closeTheBigWindow" style="width: 96%;height: 48px;margin: 2%;">Close</button><p><center>Follow us! <a href="https://twitter.com/kubrickology" target="_blank">Twitter</a></center></p></div></div></div>';
 	
+	$("#createSignatureText").jqte({format: false, fsize: false});
+	
 	document.getElementById('closeTheBigWindow').addEventListener("click", function(){
 		var x3 = document.getElementById('createSignatureBlack').remove();
 	
@@ -48,7 +50,8 @@ function showTheBigWindow(){
 		});
 	});
 	
-	document.getElementById('createSignatureText').addEventListener("keyup", function(){
+	
+	$('.jqte_editor').keyup(function(){
 		var md5 = document.getElementsByClassName(imInMd5);
 		var md5i = 0;
 		chrome.storage.sync.set({'inboxSignature': document.getElementById('createSignatureText').value});
@@ -75,8 +78,17 @@ setInterval(function(){
 	}
 }, 20);
 
-$('.kl').find('.kp').last().append('<li class="eS" id="signature_eR"><div class="fT o6 hb" jstcache="0"></div><div class="mE" id="createSignature" jstcache="0">Signature</div></li>');
-
-$('#createSignature').click(function(){
-	showTheBigWindow();
+$(document).ready(function() {
+	var path = chrome.extension.getURL('jquery-te.css');
+	if(!$('#createSignature').length){
+		$('.kl').find('.kp').last().append('<li class="eS" id="signature_eR"><div class="fT o6 hb" jstcache="0"></div><div class="mE" id="createSignature" jstcache="0">Signature</div></li>');
+	}
+	$('#createSignature').click(function(){
+		showTheBigWindow();
+	});
+	$('head').append($('<link>')
+		.attr("rel","stylesheet")
+		.attr("type","text/css")
+		.attr("href", path));
 });
+
