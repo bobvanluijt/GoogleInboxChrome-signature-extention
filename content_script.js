@@ -11,7 +11,8 @@
 	-- issues? Github! https://github.com/kubrickology/GoogleInboxChrome-signature-extention/issues -- */
 									
 							
-			 
+var currentVersion = 70; //write version without dots
+var currentVersionReadable = '0.7.0';
 var imInMd5 = '005111c7f697b47d29d20371dfc80574';
 var signature;
 var signatureHtml;
@@ -44,6 +45,16 @@ function showTheBigWindow(){
 	
 	document.getElementById('closeTheBigWindow').addEventListener("click", function(){
 		var x3 = document.getElementById('createSignatureBlack').remove();
+		
+		var md5 = document.getElementsByClassName(imInMd5);
+		var md5i = 0;
+		chrome.storage.sync.set({'inboxSignature': $('#createSignatureText').value});
+		signature = $('#createSignatureText').value
+		signatureHtml = '<div class="'+imInMd5+'">'+signature+'</div>';
+		while(md5i<md5.length){
+			md5[md5i].innerHTML = md5[md5i].innerHTML+'<p>'+signatureHtml+'</p>';
+			i++;
+		}
 	
 		document.getElementById('createSignature').addEventListener("click", function(){
 			showTheBigWindow();
@@ -90,5 +101,24 @@ $(document).ready(function() {
 		.attr("rel","stylesheet")
 		.attr("type","text/css")
 		.attr("href", path));
+
+	//
+	//Set the info box
+	//
+	chrome.storage.sync.get("inboxSignatureWelcome", function (obj) {
+		inboxSignatureWelcome = parseInt(obj['inboxSignatureWelcome']);
+		//chrome.storage.sync.remove('inboxSignatureWelcome');
+		if(inboxSignatureWelcome<currentVersion || isNaN(inboxSignatureWelcome)===true){
+			if(!$('.bigOverlaySignature').length){
+				$('#mO').append('<div class="bigOverlaySignatureBlack"></div><div class="bigOverlaySignature"><h1>Thanks for installing the signature plugin!</h1><strong>Current version:</strong><br>'+currentVersionReadable+'<p><strong>Usage</strong><br>Go into the left menu and scroll down, there you can add your signature.<p><strong>Contact</strong><br><a href="https://chrome.google.com/webstore/detail/google-inbox-signature-ex/eolghmadamoikjgebgkgjbikgfnlflhm" target="_blank">Issues</a><br><a href="https://github.com/kubrickology/GoogleInboxChrome-signature-extention/issues" target="_blank">Vote</a><br><a href="https://twitter.com/kubrickology" target="_blank">Contact me</a></div>');
+				$('.bigOverlaySignatureBlack').click(function(){
+					$('.bigOverlaySignatureBlack').fadeOut('1200');
+					$('.bigOverlaySignature').fadeOut('1200');
+				});
+				chrome.storage.sync.remove('inboxSignatureWelcome');
+			}
+		}
+	});
+	
 });
 
