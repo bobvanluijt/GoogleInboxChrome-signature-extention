@@ -43,14 +43,17 @@ function showTheBigWindow(){
 	
 	$("#createSignatureText").jqte({format: false, fsize: false});
 	
-	document.getElementById('closeTheBigWindow').addEventListener("click", function(){
-		var x3 = document.getElementById('createSignatureBlack').remove();
-		
+	document.getElementById('closeTheBigWindow').addEventListener("click", function(){	
 		var md5 = document.getElementsByClassName(imInMd5);
 		var md5i = 0;
-		chrome.storage.sync.set({'inboxSignature': $('#createSignatureText').value});
-		signature = $('#createSignatureText').value
+		
+		signature = $('.jqte_editor').html();
+		signature = signature.replace("<div>", "<br>");
+		signature = signature.replace("</div>", "");
+		
+		chrome.storage.sync.set({'inboxSignature': signature});
 		signatureHtml = '<div class="'+imInMd5+'">'+signature+'</div>';
+
 		while(md5i<md5.length){
 			md5[md5i].innerHTML = md5[md5i].innerHTML+'<p>'+signatureHtml+'</p>';
 			i++;
@@ -59,20 +62,23 @@ function showTheBigWindow(){
 		document.getElementById('createSignature').addEventListener("click", function(){
 			showTheBigWindow();
 		});
+		
+		var x3 = document.getElementById('createSignatureBlack').remove();
 	});
 	
-	
+	/*
 	$('.jqte_editor').keyup(function(){
 		var md5 = document.getElementsByClassName(imInMd5);
 		var md5i = 0;
 		chrome.storage.sync.set({'inboxSignature': document.getElementById('createSignatureText').value});
-		signature = document.getElementById('createSignatureText').value
+		signature = document.getElementById('createSignatureText').value;
 		signatureHtml = '<div class="'+imInMd5+'">'+signature+'</div>';
 		while(md5i<md5.length){
 			md5[md5i].innerHTML = md5[md5i].innerHTML+'<p>'+signatureHtml+'</p>';
 			i++;
 		}
 	});
+	*/
 }
 
 function addTheSignature(){
@@ -114,8 +120,8 @@ $(document).ready(function() {
 				$('.bigOverlaySignatureBlack').click(function(){
 					$('.bigOverlaySignatureBlack').fadeOut('1200');
 					$('.bigOverlaySignature').fadeOut('1200');
+					chrome.storage.sync.set({'inboxSignatureWelcome': currentVersion});
 				});
-				chrome.storage.sync.remove('inboxSignatureWelcome');
 			}
 		}
 	});
