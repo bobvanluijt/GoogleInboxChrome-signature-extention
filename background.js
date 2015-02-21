@@ -12,11 +12,8 @@
 	
 chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
   if (changeInfo.status == 'complete' && tab.active) {
-	  chrome.tabs.insertCSS(null, {file: "jquery-te.css"});
-	  chrome.tabs.executeScript(null, { file: "jquery.min.js" }, function() {
-		  chrome.tabs.executeScript(null, { file: "jquery-te.min.js" }, function() {
-			chrome.tabs.executeScript(null, {file: "content_script.js"});
-		  });
-	  });
+	  //chrome.tabs.executeScript(null, { file: "jquery2.js" }, function() {
+		chrome.tabs.executeScript(null, {file: "content_script.js"});
+	  //});
   }
 })

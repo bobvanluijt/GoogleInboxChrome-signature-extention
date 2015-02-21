@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Extension popup</title>
+    <style>
+      body {
+        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+        font-size: 100%;
+        width:560px;
+        min-height: 260px;
+        overflow:auto;
+      }
+      #status {
+        /* avoid an excessively wide status text */
+        white-space: pre;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 560px;
+      }
+      .button {
+      	background-color: #4285f4;
+		color: #fff;
+		border: none;
+		border-radius: 2px;
+		cursor: pointer;
+		display: inline-block;
+		font-weight: bold;
+		line-height: 2.5;
+		margin: 4px 0;
+		padding: 0 16px;
+		margin-right: 6px;
+		text-transform: uppercase;
+		white-space: nowrap;
+		width:300px;
+		-webkit-transition: box-shadow .2s cubic-bezier(.4,0,.2,1),background-color .2s cubic-bezier(.4,0,.2,1);
+		transition: box-shadow .2s cubic-bezier(.4,0,.2,1),background-color .2s cubic-bezier(.4,0,.2,1);
+		-webkit-font-smoothing: antialiased;
+      }
+      .newSignature {
+      	width:517px;
+      	text-align: center;
+      	background-color:#db4437;
+      }
+      .small {
+      	width:100%;
+      	font-size: 10px;
+      	text-align: center;
+      }
+      input {
+      	width: 322px;
+		margin-right: 10px;
+		height: 30px;
+		padding-top: 3px;
+		padding-bottom: 0px;
+		font-size: 16px;
+      }
+      h1 {
+      	font-size:1.25rem;
+      }
+    </style>
+     <script src="jquery2.js"></script>
+     <script src="popupscript.js"></script>
+  </head>
+  <body>
+  	<h1>Signature for Inbox</h1>
+  	<div class="button newSignature">Create new signature</div>
+  	<div class="small">Inbox Signature plugin by <a href="http://twitter.com/kubrickology">Kubrickology</a><br>Click <a href="https://github.com/kubrickology/GoogleInboxChrome-signature-extention/blob/master/README.md" target="_blank">here</a> for help<br>Checkout our latest art project <a href="http://www.chds.io" target="_blank">CHDS.io</a></div>
+  </body>
+</html>
+
