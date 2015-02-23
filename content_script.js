@@ -29,11 +29,19 @@ setInterval(function(){
 		if(!document.getElementsByClassName(imInMd5)[0]) {
 		    chrome.storage.sync.get(null, function(items) {
 		    	var allKeys = Object.keys(items);
-		    	var sign = 'inboxSignature('+document.getElementsByClassName("o8")[0].innerHTML+')';
+		    	if(document.getElementsByClassName("o8")[0]){
+		    		var sign = 'inboxSignature('+document.getElementsByClassName("o8")[0].innerHTML+')';
+		    	} else {
+		    		var sign = 0;
+		    	}
 				allKeys.forEach(function(entry) {
 				    if(sign==entry){
 				    	var replacerSign = items[sign];
-				    	document.getElementsByClassName("em")[0].innerHTML = '<br><p class="'+imInMd5+'">'+replacerSign+'</p>';
+				    	var currentInnerHTML = document.getElementsByClassName("em")[0].innerHTML;
+				    	if(document.getElementById(imInMd5)){
+					    	document.getElementById(imInMd5).remove();
+					    }
+				    	document.getElementsByClassName("em")[0].innerHTML = '<br><div id="'+imInMd5+'" class="'+imInMd5+'">'+replacerSign+'</div>'+currentInnerHTML;
 				    }
 				});
 			});
@@ -46,9 +54,8 @@ setInterval(function(){
 				var sign = 'inboxSignature('+document.getElementsByClassName("nJ")[0].elements["email"].value+')';
 				var element = document.getElementsByClassName("nJ")[0].getAttribute("email");
 				var replacerSign = items[sign];
-		    	document.getElementsByClassName("aS")[0].innerHTML = '<br><p class="'+imInMd5+'">'+replacerSign+'</p>';
-
-		    	
+				var currentInnerHTML_after = document.getElementsByClassName("aS")[0].innerHTML;
+			    document.getElementsByClassName("aS")[0].innerHTML = '<br><div id="'+imInMd5+'" class="'+imInMd5+'">'+replacerSign+'</div>'+currentInnerHTML_after;
 			});
 		}
 	}
