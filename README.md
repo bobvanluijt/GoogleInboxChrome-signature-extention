@@ -1,3 +1,5 @@
+# NOTE: INBOX NOW HAS SIGNATURES, THIS PLUGIN IS DEPRECATED
+
 GoogleInboxChrome-signature-extention
 =====================================
 
